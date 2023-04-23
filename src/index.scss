@@ -1,8 +1,9 @@
 html,
-body {
+body,
+#root {
   height: 100%;
 }
-body {
+#root {
   display: flex;
   flex-direction: column;
 

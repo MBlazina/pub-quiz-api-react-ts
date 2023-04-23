@@ -1,27 +1,14 @@
 import "@picocss/pico";
 import "./App.css";
-import { useEffect, useState } from "react";
+import QuizzesListing from "./components/quizzesListing/QuizzesListing";
 
 function App() {
-  const [quizes, setQuizes] = useState({});
-  const API = import.meta.env.VITE_API_QUIZES;
-  const fetchData = async () => {
-    console.log("fetch: " + API);
-    const request = await fetch(API);
-    const data = await JSON.stringify(request);
-    setQuizes(data);
-    console.log(request);
-    console.log(data);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <>
-      <header>header</header>
+      <header className="container-fluid">header</header>
       <main className="container">
         <h1>Pub Quiz</h1>
-        <p></p>
+        <QuizzesListing />
       </main>
       <footer>Footer</footer>
     </>
