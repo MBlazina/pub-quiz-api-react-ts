@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Modal from "../modal/Modal";
+import Modal from "@/components/modal/Modal";
 
 export type Quiz = {
   id: number;
@@ -25,6 +25,7 @@ const QuizzesListing = () => {
 
   return (
     <>
+      <h1>Quiz list</h1>
       <ul>
         {quizzes &&
           quizzes.map((quiz) => {

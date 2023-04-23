@@ -1,6 +1,6 @@
 import "@picocss/pico";
 import "./App.css";
-import QuizzesListing from "./components/quizzesListing/QuizzesListing";
+import QuizzesListing from "@/components/quizzesListing/QuizzesListing";
 
 function App() {
   return (

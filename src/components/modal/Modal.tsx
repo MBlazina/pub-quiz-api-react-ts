@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { isScrollbarVisible, toggleModal } from "../modal/modal-picocss.js";
+import { isScrollbarVisible, toggleModal } from "@/components/modal/modal-picocss";
 
 type Children = {
   children: React.ReactNode;
