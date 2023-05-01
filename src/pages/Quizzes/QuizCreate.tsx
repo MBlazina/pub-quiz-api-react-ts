@@ -1,5 +1,6 @@
-import { addQuiz } from "@/api/quiz-Api";
+import { addQuiz, getQuizzes } from "@/api/quiz-Api";
 import { QuestionsDto } from "@/dto/QuizDto";
+import { generateUniqueIdCheckArray } from "@/utils/utils";
 import { useEffect, useRef, useState } from "react";
 import { Form, useLoaderData } from "react-router-dom";
 
@@ -16,31 +17,52 @@ const QuizCreate = () => {
     deleteValue.splice(index, 1);
     setInputs(deleteValue);
   };
-  /*  const handleOpenQuestions = () => {}; */
-  function containsValue(array: QuestionsDto[], value: string, index: number) {
+
+  async function questionAlreadyInDB(array: QuestionsDto[], inputFieldValue: string, index: number) {
+    /* MATCHING ANSWER INPUT ELEMENT */
+    const answer = document.querySelector(`[name="answer-${index + 1}"]`);
+    /* MATCHING QUESTION ID ELEMENT */
+    const questionId = document.querySelector(`[name="id-question-${index + 1}"]`) as HTMLInputElement;
+
     for (var i = 0; i < array.length; i++) {
-      /* for (var key in array[i]) { */
-      const answer = document.querySelector(`[name="answer-${index + 1}"]`);
-      if (array[i].question === value) {
+      /* EXISTING QUESTION */
+      if (array[i].question === inputFieldValue) {
+        /* SET QUESTION ID FROM DB */
+        questionId.value = array[i].id;
+        /* SET MATCHING ANSWER AND DISABLE INPUT*/
         answer?.setAttribute("value", array[i].answer);
         answer?.setAttribute("disabled", "");
-        answer;
 
         return true;
       } else {
+        /* NEW QUESTION */
+        const questionsIDsElements = document.querySelectorAll(`[name^="id-question-"]`);
+        /* CONVERT TO ARRAY */
+        const questionsIDsArray = [];
+        for (let i = 0; i < questionsIDsElements.length; i++) {
+          questionsIDsArray.push(questionsIDsElements[i].value);
+        }
+        /* questionsIDsArray = Array.from(questionsIDsElements); */
+        const questionsIDsinDB = allQuestions.map((question) => {
+          return question.id;
+        });
+
+        const allIDs = questionsIDsArray.concat(questionsIDsinDB);
+        console.log(allIDs);
+        const uniqueQuestionID = await generateUniqueIdCheckArray(allIDs);
+        console.log(uniqueQuestionID);
+        questionId.value = parseInt(uniqueQuestionID);
+        console.log(questionId.value);
         answer?.setAttribute("value", "");
         answer?.removeAttribute("disabled");
       }
-      /*  } */
     }
     return false;
   }
-
+  const [questions, setQuestions] = useState([]);
   const handleQuestionChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const isQuestionDuplicate = containsValue(allQuestions, event.target.value, index);
+    const isQuestionDuplicate = questionAlreadyInDB(allQuestions, event.target.value, index);
     if (isQuestionDuplicate) {
-      console.log(event.target);
-      console.log(isQuestionDuplicate);
       event.target.classList.add("existing");
     } else {
       event.target.classList.remove("existing");
@@ -49,22 +71,21 @@ const QuizCreate = () => {
 
   const [quizName, setQuizName] = useState();
 
-  function generateRandom64BitInt() {
+  /*   function generateRandom64BitInt() {
     const randomInt = BigInt(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
     console.log("random: " + randomInt);
     return randomInt;
   }
 
   async function generateUniqueQuizId() {
-    const response = await fetch("http://localhost:3004/quizzes/");
-    const quizzes = await response.json();
+    const quizzes = await getQuizzes();
     let newId = generateRandom64BitInt().toString();
     while (quizzes.some((quiz: any) => quiz.id === newId)) {
       newId = generateRandom64BitInt().toString();
     }
     console.log(newId);
     return newId;
-  }
+  } */
 
   const handleQuizSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,7 +100,7 @@ const QuizCreate = () => {
     }
 
     const dataToSubmit = {
-      id: parseInt(await generateUniqueQuizId()),
+      id: await generateUniqueIdCheckArray(await getQuizzes()),
       name: quizName,
       questions: questionsArray,
     };
@@ -116,6 +137,8 @@ const QuizCreate = () => {
                 </a>
                 <h3>Question {index + 1}</h3>
               </label>
+              <label htmlFor={`question-${index + 1}-id`}>id</label>
+              <input type="number" name={`id-question-${index + 1}`} />
               <input type="text" name={`question-${index + 1}`} list="list" autoComplete="off" onChange={(event) => handleQuestionChange(event, index)} />
               <label htmlFor={`answer-${index + 1}`}>Answer {index + 1}</label>
               <input type="text" name={`answer-${index + 1}`} />
