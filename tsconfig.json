@@ -21,7 +21,9 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
-      "@/components/*": ["components/*"]
+      "@/components/*": ["components/*"],
+      "@/api/*": ["api/*"],
+      "@/dto/*": ["dto/*"]
     }
   },
   "include": ["src"],

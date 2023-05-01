@@ -1,30 +1,29 @@
-import { useEffect } from "react";
-import { isScrollbarVisible, toggleModal } from "@/components/modal/modal-picocss";
+import { openModal, toggleModal } from "@/components/modal/modal-picocss";
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 type Children = {
-  children: React.ReactNode;
+  children: any;
 };
 
 const Modal = ({ children }: Children) => {
-  useEffect(() => {
-    console.log(isScrollbarVisible());
-  }, []);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
+  const handleModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div>
-      <button className="contrast" data-target="modal-example" onClick={toggleModal}>
-        Launch demo modal
-      </button>
-
-      <dialog id="modal-example">
-        <article>
-          <a href="#close" aria-label="Close" className="close" data-target="modal-example" onClick={toggleModal}></a>
+      {isModalOpen === false && <Navigate to={"/quizzes"} replace={true} />}
+      <dialog id="modal-element" open={isModalOpen}>
+        <article style={{ minWidth: "inherit" }}>
+          <a aria-label="Close" className="close" data-target="modal-element" onClick={handleModal}></a>
           {children}
           <footer>
-            <a href="#cancel" role="button" className="secondary" data-target="modal-example" onClick={toggleModal}>
+            <a role="button" className="secondary" data-target="modal-element" onClick={() => setIsModalOpen(false)}>
               Cancel
             </a>
-            <a href="#confirm" role="button" data-target="modal-example" onClick={toggleModal}>
+            <a href="#confirm" role="button" data-target="modal-element" onClick={toggleModal}>
               Confirm
             </a>
           </footer>

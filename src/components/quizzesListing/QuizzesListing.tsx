@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
+// COMPONENTS
 import Modal from "@/components/modal/Modal";
+//API
+import { getQuizzes, deleteQuiz } from "@/api/quiz-Api";
+import { QuizzListingStyled } from "./QuizzesListing.style";
+import QuizzesListingItem from "../QuizzesListingItem/QuizzesListingItem";
 
 export type Quiz = {
   id: number;
@@ -8,30 +13,31 @@ export type Quiz = {
 };
 const QuizzesListing = () => {
   const [quizzes, setQuizzes] = useState<Quiz[]>();
+  const fetchQuizzes = async () => {
+    setQuizzes(await getQuizzes());
+  };
   useEffect(() => {
-    /*  fetch(import.meta.env.VITE_API_QUIZZES) */
-
-    fetch("http://localhost:3000/quizzes")
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        setQuizzes(res);
-      })
-      .catch((err) => {
-        console.error(err.message);
-      });
+    fetchQuizzes().catch((error) => {
+      console.error(error);
+    });
   }, []);
+
+  const handleQuizDelete = async () => {
+    await deleteQuiz(5);
+    fetchQuizzes();
+  };
 
   return (
     <>
       <h1>Quiz list</h1>
-      <ul>
+      <button onClick={handleQuizDelete}>delete</button>
+      <QuizzListingStyled>
         {quizzes &&
           quizzes.map((quiz) => {
-            return <li key={quiz.id}>{quiz.name}</li>;
+            return <QuizzesListingItem {...quiz} key={quiz.id} />;
           })}
-      </ul>
+      </QuizzListingStyled>
+
       <Modal>
         <p>Modal test</p>
       </Modal>
