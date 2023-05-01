@@ -1,5 +1,5 @@
-import { openModal, toggleModal } from "@/components/modal/modal-picocss";
-import { useEffect, useState } from "react";
+import { toggleModal } from "@/components/modal/modal-picocss";
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
 type Children = {

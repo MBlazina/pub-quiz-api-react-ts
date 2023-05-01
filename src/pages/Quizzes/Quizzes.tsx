@@ -1,25 +1,27 @@
 import { deleteQuiz } from "@/api/quiz-Api";
 import { QuizDto } from "@/dto/QuizDto";
-import { Link, useParams, useRouteError } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Outlet, useLoaderData } from "react-router-dom";
+import { QuizzesStyled } from "./Quizzes.style";
 
 const Quizzes = () => {
   const quizzes = useLoaderData() as QuizDto[];
-  const deleteSelected = (id) => {
-    deleteQuiz(id);
-  };
+
   return (
     <>
-      <h1>Quizzes</h1>
-      <Link to="create" role="button">
-        Create Quiz
-      </Link>
-      <ul>
+      <h1>
+        Quizzes{" "}
+        <Link to="create" role="button">
+          New
+        </Link>
+      </h1>
+
+      <QuizzesStyled>
         {quizzes.map((quiz: QuizDto) => {
           return (
-            <li key={quiz.id}>
-              <Link key={quiz.id} to={`${quiz.id}/edit`} data-target="modal-element">
-                {quiz.name}
+            <li key={quiz.id} data-tooltip="Click to edit Quiz">
+              <Link key={quiz.id} to={`${quiz.id}/edit`} data-target="modal-element" className="quiz-title">
+                <strong>{quiz.name}</strong>
               </Link>
 
               <a href="#" role="button" onClick={() => deleteQuiz(quiz.id)}>
@@ -31,7 +33,7 @@ const Quizzes = () => {
             </li>
           );
         })}
-      </ul>
+      </QuizzesStyled>
       <Outlet />
     </>
   );

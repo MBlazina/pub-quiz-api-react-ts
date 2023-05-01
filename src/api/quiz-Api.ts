@@ -20,11 +20,8 @@ export async function getQuestions() {
   return body;
 }
 
-export const createQuiz = async ({ request }) => {
+export const createQuiz = async ({ request }: any) => {
   const data = await request.formData();
-  const submission = {
-    name: data.name,
-  };
 
   return data;
 };
@@ -39,12 +36,12 @@ export const createQuiz = async ({ request }) => {
   console.log(fetchURL + id);
   return response.json();
 }; */
-export const quizDetailLoader = async ({ params }) => {
+export const quizDetailLoader = async ({ params }: any) => {
   const { id } = params;
   const response = await fetch(fetchURL + id);
   return response.json();
 };
-export async function addQuiz(data) {
+export async function addQuiz(data: QuizDto) {
   /* await fetch(fetchURL, { method: "POST" });
   const response = await fetch(fetchURL);
   const body = await response.json();

@@ -4,7 +4,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import Home from "./pages/Home";
 import RootLayout from "./layouts/RootLayout";
 import Quizzes from "./pages/Quizzes/Quizzes";
-import { createQuiz, getQuestions, getQuizzes, quizDetailLoader } from "./api/quiz-Api";
+import { getQuestions, getQuizzes, quizDetailLoader } from "./api/quiz-Api";
 import QuizDetail from "./pages/Quizzes/QuizDetail";
 import ErrorPage from "./pages/ErrorPage";
 import QuizEdit from "./pages/Quizzes/QuizEdit";

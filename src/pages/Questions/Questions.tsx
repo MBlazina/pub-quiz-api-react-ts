@@ -1,5 +1,5 @@
 import { QuestionsDto } from "@/dto/QuizDto";
-import React from "react";
+
 import { useLoaderData } from "react-router-dom";
 
 const Questions = () => {
