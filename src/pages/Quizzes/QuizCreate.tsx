@@ -98,7 +98,7 @@ const QuizCreate = () => {
     <>
       <datalist id="list">
         {allQuestions.map((question) => (
-          <option value={question.question}></option>
+          <option value={question.question} key={question.id}></option>
         ))}
       </datalist>
 
