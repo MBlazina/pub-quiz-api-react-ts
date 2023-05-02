@@ -22,6 +22,10 @@ To start project run `npm run dev`
 - Start Quiz (shown using react-slick with progress bar and answers hiddden by default and shown by clicking on the "Show Answer" button)
 - Delete Quiz
 - TODO Edit Quiz in modal
+- TODO Create Quiz form validations
+- View all questions
+
+When creating a quiz, all questions are pulled in a dataset an can be selected in the Question input field. If a question is selected that is already in the db its matching answer and id are pulled to the form and if a new question is added a new unique id is generated for it. When submiting the form the `quizzes storage object` is updated and also new questions are added to the `questions storage object`
 
 ## Project styling
 
