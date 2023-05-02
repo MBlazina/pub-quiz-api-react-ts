@@ -3,6 +3,7 @@ import { QuestionsDto } from "@/dto/QuizDto";
 import { generateUniqueIdCheckArray } from "@/utils/utils";
 import { useEffect, useRef, useState } from "react";
 import { Form, useLoaderData } from "react-router-dom";
+import { QuizCreateStyled } from "./QuizCreate.style";
 
 const QuizCreate = () => {
   const formRef = useRef(null);
@@ -105,7 +106,7 @@ const QuizCreate = () => {
   }, []);
 
   return (
-    <>
+    <QuizCreateStyled>
       <datalist id="list">
         {allQuestions.map((question) => (
           <option value={question.question} key={question.id}></option>
@@ -119,7 +120,7 @@ const QuizCreate = () => {
         <h2>Questions</h2>
         {inputs.map((input, index) => {
           return (
-            <div key={index}>
+            <div key={index} className="question">
               <label htmlFor={`question-${index + 1}`}>
                 <a href="#" role="button" onClick={() => handleDelete(index)}>
                   X
@@ -133,13 +134,13 @@ const QuizCreate = () => {
             </div>
           );
         })}
-        <a href="#" role="button" onClick={handleAdd}>
+        <a href="#" role="button" onClick={handleAdd} className="add-question">
           Add question
         </a>
 
-        <button type="submit">Create</button>
+        <button type="submit">Create Quiz</button>
       </Form>
-    </>
+    </QuizCreateStyled>
   );
 };
 

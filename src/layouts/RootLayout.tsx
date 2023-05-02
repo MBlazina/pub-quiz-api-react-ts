@@ -7,7 +7,7 @@ const RootLayout = () => {
       <main>
         <Outlet />
       </main>
-      <footer>Footer</footer>
+      <footer style={{ textAlign: "center" }}>Created with React, react-router-dom and json-server.</footer>
     </div>
   );
 };
