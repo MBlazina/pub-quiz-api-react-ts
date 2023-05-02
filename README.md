@@ -2,7 +2,7 @@
 
 ## Intro
 
-Simple Pub Quiz app done in React with json-server as storage created with Vite
+Simple Pub Quiz app done in React with json-server as storage with Typescript and created with Vite
 
 ## Start json-server
 
@@ -17,11 +17,11 @@ To start project run `npm run dev`
 
 ### Main functionalities
 
--View all quizzes
--Create New Quiz
--Start Quiz (shown using react-slick with progress bar and answers hiddden by default and shown by clicking on the "Show Answer" button)
--Delete Quiz
--TODO Edit Quiz in modal
+- View all quizzes
+- Create New Quiz
+- Start Quiz (shown using react-slick with progress bar and answers hiddden by default and shown by clicking on the "Show Answer" button)
+- Delete Quiz
+- TODO Edit Quiz in modal
 
 ## Project styling
 
@@ -46,13 +46,19 @@ All api calls are in `src/api/quiz-Api.ts`
 
 ### components
 
+-
+
 ### dto
 
 Base Dto for quizz and questions objects
 
 ### layouts
 
+-
+
 ### pages
+
+-
 
 ### utils
 
