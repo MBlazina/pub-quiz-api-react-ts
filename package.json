@@ -5,22 +5,26 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "server": "json-server --watch public/demo-server/db.json",
+    "server": "json-server --watch public/demo-server/db.json --port 3004",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "@picocss/pico": "^1.5.10",
+    "@types/react-router-dom": "^5.3.3",
     "json-server": "^0.17.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.62.0"
+    "react-router-dom": "^6.11.0",
+    "sass": "^1.62.0",
+    "styled-components": "^5.3.10"
   },
   "devDependencies": {
     "@types/node": "^18.16.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react": "^4.0.0-beta.0",
