@@ -8,6 +8,16 @@
           "id": 1,
           "question": "Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
           "answer": "Ada Lovelace"
+        },
+        {
+          "id": 3,
+          "question": "3 Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
+          "answer": "3 Ada Lovelace"
+        },
+        {
+          "id": 4,
+          "question": "4 Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
+          "answer": "4 Ada Lovelace"
         }
       ]
     },
@@ -17,8 +27,8 @@
       "questions": [
         {
           "id": 1,
-          "question": "Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
-          "answer": "Ada Lovelace"
+          "question": "3 Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
+          "answer": "3 Ada Lovelace"
         }
       ]
     },
@@ -28,8 +38,8 @@
       "questions": [
         {
           "id": 1,
-          "question": "Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
-          "answer": "Ada Lovelace"
+          "question": "4 Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
+          "answer": "4 Ada Lovelace"
         }
       ]
     },
@@ -39,8 +49,8 @@
       "questions": [
         {
           "id": 1,
-          "question": "Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
-          "answer": "Ada Lovelace"
+          "question": "6 Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
+          "answer": "6 Ada Lovelace"
         }
       ]
     }
@@ -54,27 +64,27 @@
     {
       "id": 2,
       "question": "2 Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
-      "answer": "Ada Lovelace"
+      "answer": "2Ada Lovelace"
     },
     {
       "id": 3,
       "question": "3 Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
-      "answer": "Ada Lovelace"
+      "answer": "3 Ada Lovelace"
     },
     {
       "id": 4,
       "question": "4 Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
-      "answer": "Ada Lovelace"
+      "answer": "4 Ada Lovelace"
     },
     {
       "id": 5,
       "question": "5 Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
-      "answer": "Ada Lovelace"
+      "answer": "5 Ada Lovelace"
     },
     {
       "id": 6,
       "question": "6 Who was the English mathematician and writer widely considered as the worldq's first computer programmer for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine?",
-      "answer": "Ada Lovelace"
+      "answer": "6 Ada Lovelace"
     }
   ]
 }
