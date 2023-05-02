@@ -7,7 +7,7 @@ Simple Pub Quiz app done in React with json-server as storage with Typescript an
 ## Start json-server
 
 To run json-server run `npm run server`.
-The project uses .env files to start the server and the same paths are used to fetch data so that it can be easily switched to a hosted database links.
+The project uses .env files to start the server and the same paths are used to fetch data so that it can be easily switched to a hosted database links. the local json-server db can be found in `public/demo-server/db.json`
 
 ## Start project
 
