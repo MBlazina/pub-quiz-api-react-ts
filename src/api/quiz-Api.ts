@@ -36,7 +36,7 @@ async function addQuestions(newQuestion: QuestionsDto) {
   // Check if the question already exists in the DB
   const response = await fetch(questionsUrl);
   const existingQuestions = await response.json();
-  const exists = existingQuestions.some((question) => question.id === newQuestion.id);
+  const exists = existingQuestions.some((question: any) => question.id === newQuestion.id);
 
   // Post the data if it doesn't already exist in the DB
   if (!exists) {

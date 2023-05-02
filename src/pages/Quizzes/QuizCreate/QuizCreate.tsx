@@ -22,13 +22,6 @@ const QuizCreate = () => {
   };
 
   async function validateQuestions(array: QuestionsDto[], inputFieldValue, index: number) {
-    /* const questionsInputs: HTMLInputElement[] = Array.from(form.querySelectorAll("input[name^='question-']"));
-    const answersInputs: HTMLInputElement[] = Array.from(form.querySelectorAll("input[name^='answer-']")); */
-    /*  const currentQuestionValue = inputField.target.value; */ /* WHAT IS... */
-    /* const currentQuestionName = inputField.target.name; */ /* question-1 */
-    /* const currentAnswer = document.querySelector(`[name="answer-${currentQuestionName}"]`); */ /* answer-question-1 */
-    /* const currentAnswerValue = currentAnswer.value; */
-
     /* MATCHING ANSWER INPUT ELEMENT */
     const answer = document.querySelector(`[name="answer-${index + 1}"]`);
     /* MATCHING QUESTION ID ELEMENT */

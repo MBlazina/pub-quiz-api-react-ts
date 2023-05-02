@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import RootLayout from "./layouts/RootLayout";
 import Quizzes from "./pages/Quizzes/Quizzes";
 import { getQuestions, getQuizzes, quizDetailLoader } from "./api/quiz-Api";
-import QuizDetail from "./pages/Quizzes/QuizDetail";
+import QuizDetail from "./pages/Quizzes/QuizDetail/QuizDetail";
 import ErrorPage from "./pages/ErrorPage";
 import QuizEdit from "./pages/Quizzes/QuizEdit";
 import QuizCreate from "./pages/Quizzes/QuizCreate/QuizCreate";
