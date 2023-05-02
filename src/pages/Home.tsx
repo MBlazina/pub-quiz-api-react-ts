@@ -17,6 +17,12 @@ const Home = () => {
           </Link>
         </div>
       </section>
+      <section>
+        The project Readme file can be accesed on the following{" "}
+        <a href="https://github.com/MBlazina/pub-quiz-api-react-ts#readme" target="_blank">
+          GitHub link
+        </a>
+      </section>
     </HomeStyled>
   );
 };
