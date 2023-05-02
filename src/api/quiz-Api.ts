@@ -1,4 +1,4 @@
-import { QuizDto } from "@/dto/QuizDto";
+import { QuestionsDto, QuizDto } from "@/dto/QuizDto";
 
 const fetchURL = import.meta.env.VITE_API_QUIZZES;
 
@@ -25,29 +25,36 @@ export const createQuiz = async ({ request }: any) => {
 
   return data;
 };
-/* export const careerDetailLoader = async ({ params }) => {
-  const { id } = params;
-  const res = await fetch("http://localhost:3000/careers/" + id);
-  return res.json();
-}; */
 
-/* export const quizDetailLoader = async (id: string) => {
-  const response = await fetch(fetchURL + id.toString());
-  console.log(fetchURL + id);
-  return response.json();
-}; */
 export const quizDetailLoader = async ({ params }: any) => {
   const { id } = params;
   const response = await fetch(fetchURL + id);
   return response.json();
 };
-export async function addQuiz(data: QuizDto) {
-  /* await fetch(fetchURL, { method: "POST" });
-  const response = await fetch(fetchURL);
-  const body = await response.json();
-  return body; */
 
-  fetch(fetchURL, {
+async function addQuestions(newQuestion: QuestionsDto) {
+  // Check if the question already exists in the DB
+  const response = await fetch(questionsUrl);
+  const existingQuestions = await response.json();
+  const exists = existingQuestions.some((question) => question.id === newQuestion.id);
+
+  // Post the data if it doesn't already exist in the DB
+  if (!exists) {
+    const postResponse = await fetch(questionsUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newQuestion),
+    });
+    if (!postResponse.ok) {
+      throw new Error("Failed to post data to API");
+    }
+  }
+}
+
+export async function addQuiz(data: QuizDto, questions: QuestionsDto) {
+  await fetch(fetchURL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -60,14 +67,14 @@ export async function addQuiz(data: QuizDto) {
       }
       return response.json();
     })
-    .then((data) => {
-      // Process the response data
-      console.log(data);
-    })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
     });
+  for (let i = 0; i < questions.length; i++) {
+    await addQuestions(questions[i]);
+  }
 }
+
 export async function deleteQuiz(id: number) {
   await fetch(`${fetchURL}/${id}`, { method: "DELETE" });
   const response = await fetch(fetchURL);

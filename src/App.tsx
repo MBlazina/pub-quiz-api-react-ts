@@ -8,7 +8,7 @@ import { getQuestions, getQuizzes, quizDetailLoader } from "./api/quiz-Api";
 import QuizDetail from "./pages/Quizzes/QuizDetail";
 import ErrorPage from "./pages/ErrorPage";
 import QuizEdit from "./pages/Quizzes/QuizEdit";
-import QuizCreate, { action as createAction } from "./pages/Quizzes/QuizCreate";
+import QuizCreate from "./pages/Quizzes/QuizCreate";
 import Questions from "./pages/Questions/Questions";
 
 const router = createBrowserRouter(
@@ -21,7 +21,7 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path="quizzes/:id" element={<QuizDetail />} loader={quizDetailLoader}></Route>
-      <Route path="quizzes/create" element={<QuizCreate />} loader={getQuestions} action={createAction} />
+      <Route path="quizzes/create" element={<QuizCreate />} loader={getQuestions} />
       <Route path="questions" element={<Questions />} loader={getQuestions}></Route>
       <Route path="*" element={<ErrorPage />}></Route>
     </Route>

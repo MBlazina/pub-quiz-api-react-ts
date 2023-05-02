@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { Form, useLoaderData } from "react-router-dom";
 
 const QuizCreate = () => {
+  const formRef = useRef(null);
+  const form = formRef.current;
   const allQuestions = useLoaderData() as QuestionsDto[];
   const [inputs, setInputs] = useState([[]]);
 
@@ -18,14 +20,21 @@ const QuizCreate = () => {
     setInputs(deleteValue);
   };
 
-  async function questionAlreadyInDB(array: QuestionsDto[], inputFieldValue: string, index: number) {
+  async function validateQuestions(array: QuestionsDto[], inputFieldValue, index: number) {
+    /* const questionsInputs: HTMLInputElement[] = Array.from(form.querySelectorAll("input[name^='question-']"));
+    const answersInputs: HTMLInputElement[] = Array.from(form.querySelectorAll("input[name^='answer-']")); */
+    /*  const currentQuestionValue = inputField.target.value; */ /* WHAT IS... */
+    /* const currentQuestionName = inputField.target.name; */ /* question-1 */
+    /* const currentAnswer = document.querySelector(`[name="answer-${currentQuestionName}"]`); */ /* answer-question-1 */
+    /* const currentAnswerValue = currentAnswer.value; */
+
     /* MATCHING ANSWER INPUT ELEMENT */
     const answer = document.querySelector(`[name="answer-${index + 1}"]`);
     /* MATCHING QUESTION ID ELEMENT */
     const questionId = document.querySelector(`[name="id-question-${index + 1}"]`) as HTMLInputElement;
-
+    /* const newQuestionsArray = []; */
     for (var i = 0; i < array.length; i++) {
-      /* EXISTING QUESTION */
+      /* IF EXISTING QUESTION */
       if (array[i].question === inputFieldValue) {
         /* SET QUESTION ID FROM DB */
         questionId.value = array[i].id;
@@ -35,68 +44,51 @@ const QuizCreate = () => {
 
         return true;
       } else {
-        /* NEW QUESTION */
+        /* IF NEW QUESTION */
+        /* GET ELEMENTS */
         const questionsIDsElements = document.querySelectorAll(`[name^="id-question-"]`);
         /* CONVERT TO ARRAY */
         const questionsIDsArray = [];
+
+        /* GET VALUES */
         for (let i = 0; i < questionsIDsElements.length; i++) {
           questionsIDsArray.push(questionsIDsElements[i].value);
         }
-        /* questionsIDsArray = Array.from(questionsIDsElements); */
+
         const questionsIDsinDB = allQuestions.map((question) => {
           return question.id;
         });
 
-        const allIDs = questionsIDsArray.concat(questionsIDsinDB);
-        console.log(allIDs);
-        const uniqueQuestionID = await generateUniqueIdCheckArray(allIDs);
-        console.log(uniqueQuestionID);
-        questionId.value = parseInt(uniqueQuestionID);
-        console.log(questionId.value);
+        const allIDs: any = questionsIDsArray.concat(questionsIDsinDB);
+
+        /* GENERAT UNIQUE ID THAT IS NOT ALREADY IN FORM OR DB */
+        questionId.value = parseInt(await generateUniqueIdCheckArray(allIDs));
+
+        /* ENABLE AND CLEAR MATCHING ANSWER FIELD */
         answer?.setAttribute("value", "");
         answer?.removeAttribute("disabled");
       }
     }
     return false;
   }
-  const [questions, setQuestions] = useState([]);
+
   const handleQuestionChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const isQuestionDuplicate = questionAlreadyInDB(allQuestions, event.target.value, index);
-    if (isQuestionDuplicate) {
-      event.target.classList.add("existing");
-    } else {
-      event.target.classList.remove("existing");
-    }
+    validateQuestions(allQuestions, event.target.value, index);
   };
 
   const [quizName, setQuizName] = useState();
-
-  /*   function generateRandom64BitInt() {
-    const randomInt = BigInt(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-    console.log("random: " + randomInt);
-    return randomInt;
-  }
-
-  async function generateUniqueQuizId() {
-    const quizzes = await getQuizzes();
-    let newId = generateRandom64BitInt().toString();
-    while (quizzes.some((quiz: any) => quiz.id === newId)) {
-      newId = generateRandom64BitInt().toString();
-    }
-    console.log(newId);
-    return newId;
-  } */
 
   const handleQuizSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const form = formRef.current;
 
+    const questionsIDInputs: HTMLInputElement[] = Array.from(form.querySelectorAll("input[name^='id-question-']"));
     const questionsInputs: HTMLInputElement[] = Array.from(form.querySelectorAll("input[name^='question-']"));
     const answersInputs: HTMLInputElement[] = Array.from(form.querySelectorAll("input[name^='answer-']"));
 
     let questionsArray = [];
     for (let i = 0; i < questionsInputs.length; i++) {
-      questionsArray.push({ question: questionsInputs[i].value, answer: answersInputs[i].value });
+      questionsArray.push({ id: questionsIDInputs[i].value, question: questionsInputs[i].value, answer: answersInputs[i].value });
     }
 
     const dataToSubmit = {
@@ -104,12 +96,9 @@ const QuizCreate = () => {
       name: quizName,
       questions: questionsArray,
     };
-    console.log("data");
-    console.log(dataToSubmit);
-    addQuiz(dataToSubmit);
-  };
 
-  const formRef = useRef(null);
+    addQuiz(dataToSubmit, questionsArray);
+  };
 
   useEffect(() => {
     handleAdd();
@@ -126,7 +115,7 @@ const QuizCreate = () => {
       <h1>New Quiz</h1>
       <Form method="post" action="/quizzes/create" ref={formRef} onSubmit={handleQuizSubmit}>
         <label htmlFor="quiz-name">Quiz Name</label>
-        <input type="text" name="name" onChange={(event) => setQuizName(event.target.value)} />
+        <input type="text" name="name" onChange={(event) => setQuizName(event.target.value)} autoComplete="off" />
         <h2>Questions</h2>
         {inputs.map((input, index) => {
           return (
@@ -137,8 +126,7 @@ const QuizCreate = () => {
                 </a>
                 <h3>Question {index + 1}</h3>
               </label>
-              <label htmlFor={`question-${index + 1}-id`}>id</label>
-              <input type="number" name={`id-question-${index + 1}`} />
+              <input type="number" name={`id-question-${index + 1}`} style={{ display: "none" }} />
               <input type="text" name={`question-${index + 1}`} list="list" autoComplete="off" onChange={(event) => handleQuestionChange(event, index)} />
               <label htmlFor={`answer-${index + 1}`}>Answer {index + 1}</label>
               <input type="text" name={`answer-${index + 1}`} />
@@ -156,17 +144,3 @@ const QuizCreate = () => {
 };
 
 export default QuizCreate;
-
-export const action = async ({ request }: any) => {
-  const data = Object.fromEntries(await request.formData());
-  console.log(data);
-
-  /*   const data = await request.formData();
-  const submit = {
-    name: data.name,
-    question: data.question,
-    answer: data.answer,
-  }; */
-
-  return data;
-};
