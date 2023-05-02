@@ -17,7 +17,7 @@ const QuizDetail = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  const handleChangeSlide = (e) => {
+  const handleChangeSlide = (e: any) => {
     console.log((100 / questions.length) * (e + 1));
     setProgress((100 / questions.length) * (e + 1));
   };
@@ -28,7 +28,7 @@ const QuizDetail = () => {
       <h1>{quiz.name}</h1>
 
       <progress value={progress} max="100"></progress>
-      <Slider {...settings} afterChange={(e) => handleChangeSlide(e)}>
+      <Slider {...settings} afterChange={(e: any) => handleChangeSlide(e)}>
         {questions.map((item, index) => {
           return (
             <div key={item.id}>
